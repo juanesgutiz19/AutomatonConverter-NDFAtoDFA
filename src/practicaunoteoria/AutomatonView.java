@@ -69,7 +69,6 @@ public class AutomatonView extends javax.swing.JFrame {
         }
     }
 
-    
     public void addStatesToTable(ArrayList<State> states) {
         DefaultTableModel m = (DefaultTableModel) tableAutomaton.getModel();
         m.addColumn("A/R");
@@ -128,6 +127,11 @@ public class AutomatonView extends javax.swing.JFrame {
         buttonSimplify.setLabel("Check the automaton");
 
         buttonCheckDeterminism1.setLabel("Determinism or non-determinism");
+        buttonCheckDeterminism1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCheckDeterminism1ActionPerformed(evt);
+            }
+        });
 
         buttonConvert.setLabel("Convert to deterministic automaton");
 
@@ -200,6 +204,22 @@ public class AutomatonView extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_buttonAddTransitionActionPerformed
+
+    private void buttonCheckDeterminism1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCheckDeterminism1ActionPerformed
+        try {
+            boolean nonDeterministic = false;
+            for (int i = 0; i < tableAutomaton.getRowCount(); i++) 
+                for (int j = 1; j < tableAutomaton.getColumnCount() - 1; j++) 
+                    if (tableAutomaton.getValueAt(i, j).toString().contains(","))  nonDeterministic = true;
+            if (nonDeterministic) {
+                javax.swing.JOptionPane.showMessageDialog(this, "¡The automaton entered is non-deterministic!");
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "¡The automaton entered is deterministic!");
+            }
+        } catch (NullPointerException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Fill the transitions correctly");
+        }
+    }//GEN-LAST:event_buttonCheckDeterminism1ActionPerformed
 
     public class MyModel extends DefaultTableModel {
 
