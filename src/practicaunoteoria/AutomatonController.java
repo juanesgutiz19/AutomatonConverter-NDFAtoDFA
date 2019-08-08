@@ -11,7 +11,6 @@ public class AutomatonController {
 
     private FA myAutomaton = new FA();
 
-    
     public boolean isFirstStateInitial(String[] states) {
         return states[0].contains("!");
     }
@@ -58,6 +57,19 @@ public class AutomatonController {
         automatonSymbols.addAll(Arrays.asList(symbols));
         myAutomaton.setInputSymbols(automatonSymbols);
     }
+    
+    public void setTransitions(ArrayList<ArrayList<String>> transitions){
+        myAutomaton.setTransitions(transitions);
+    }
+    
+    public ArrayList<ArrayList<String>> getTransitions(){
+        return myAutomaton.getTransitions();
+    }
 
-
+    public void setMyAutomaton(FA myAutomaton) {
+        this.myAutomaton = myAutomaton;
+    }
+    
+    
+    
 }

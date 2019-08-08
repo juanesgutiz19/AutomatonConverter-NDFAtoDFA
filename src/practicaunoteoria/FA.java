@@ -23,14 +23,7 @@ public class FA {
     public FA(){
         
     }
-    
-    public FA(boolean containsNullSecuence, ArrayList<ArrayList<String>> transitions, ArrayList<State> states, ArrayList<String> inputSymbols) {
-        this.containsNullSecuence = containsNullSecuence;
-        this.transitions = transitions;
-        this.states = states;
-        this.inputSymbols = inputSymbols;
-    }
-
+       
     /*
     public boolean containsState(String state){
         states.forEach((s) -> {
@@ -41,6 +34,13 @@ public class FA {
         return false;
     }
     */
+      
+    public FA(boolean containsNullSecuence, ArrayList<ArrayList<String>> transitions, ArrayList<State> states, ArrayList<String> inputSymbols) {
+        this.containsNullSecuence = containsNullSecuence;
+        this.transitions = transitions;
+        this.states = states;
+        this.inputSymbols = inputSymbols;
+    }
     
     public State getState(String state){
         for (int j = 0; j < states.size(); j++) 

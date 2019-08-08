@@ -6,6 +6,7 @@
 package practicaunoteoria;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -17,20 +18,19 @@ public class AutomatonView extends javax.swing.JFrame {
     /**
      * Creates new form AutomatonView
      */
-    
-   private String[] transitions;
-   private AutomatonController automatonController;
-   private String[] inputSymbols;
-   private String[] states;
-   private FA automaton;
-   
+    private String[] transitions;
+    private AutomatonController automatonController;
+    private String[] inputSymbols;
+    private String[] states;
+    private FA automaton;
+
     public AutomatonView() {
         initComponents();
-        
+
         this.setLocationRelativeTo(null);
     }
-    
-    public AutomatonView(String[] states, String[] inputSymbols){
+
+    public AutomatonView(String[] states, String[] inputSymbols) {
         initComponents();
         automaton = new FA();
         automatonController = new AutomatonController();
@@ -40,35 +40,39 @@ public class AutomatonView extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
     }
 
-    public void showAutomaton(String[] states, String[] inputSymbols){
+    public void showAutomaton(String[] states, String[] inputSymbols) {
         addRowsToTable(states.length, inputSymbols.length);
         automatonController.setStates(states);
         automatonController.setSymbols(inputSymbols);
         addSymbolsToTable(automatonController.getMyAutomaton().getInputSymbols());
         addStatesToTable(automatonController.getMyAutomaton().getStates());
     }
+
     
-    public void addRowsToTable(int rows, int columns){
+    public void addRowsToTable(int rows, int columns) {
         String i = new String();
         String j = "";
-        for (int k = 0; k < columns; k++) 
+        for (int k = 0; k < columns; k++) {
             i = i.concat(j);
+        }
         DefaultTableModel m = (DefaultTableModel) tableAutomaton.getModel();
         for (int k = 0; k < rows; k++) {
             m.addRow(new Object[]{i});
         }
     }
-    
+
     public void addSymbolsToTable(ArrayList<String> symbols) {
         DefaultTableModel m = (DefaultTableModel) tableAutomaton.getModel();
         m.addColumn("States");
-        for (int j = 0; j < symbols.size(); j++)
+        for (int j = 0; j < symbols.size(); j++) {
             m.addColumn(symbols.get(j));
+        }
     }
+
     
     public void addStatesToTable(ArrayList<State> states) {
         DefaultTableModel m = (DefaultTableModel) tableAutomaton.getModel();
-        m.addColumn("A ó R");
+        m.addColumn("A/R");
         for (int j = 0; j < states.size(); j++) {
             m.setValueAt(states.get(j).getNameState(), j, 0);
             if (states.get(j).isAcceptingState()) {
@@ -78,7 +82,7 @@ public class AutomatonView extends javax.swing.JFrame {
             }
         }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -91,6 +95,11 @@ public class AutomatonView extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tableAutomaton = new javax.swing.JTable();
         buttonAddTransition = new java.awt.Button();
+        buttonSimplify = new java.awt.Button();
+        buttonCheckDeterminism1 = new java.awt.Button();
+        buttonConvert = new java.awt.Button();
+        buttonSimplify1 = new java.awt.Button();
+        jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -110,6 +119,25 @@ public class AutomatonView extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tableAutomaton);
 
         buttonAddTransition.setLabel("Add transition");
+        buttonAddTransition.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAddTransitionActionPerformed(evt);
+            }
+        });
+
+        buttonSimplify.setLabel("Check the automaton");
+
+        buttonCheckDeterminism1.setLabel("Determinism or non-determinism");
+
+        buttonConvert.setLabel("Convert to deterministic automaton");
+
+        buttonSimplify1.setLabel("Simplify automaton");
+
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -117,23 +145,61 @@ public class AutomatonView extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 553, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(buttonAddTransition, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 553, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(buttonAddTransition, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(buttonCheckDeterminism1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+                            .addComponent(buttonConvert, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+                            .addComponent(buttonSimplify1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(buttonSimplify, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField1)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buttonAddTransition, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(buttonAddTransition, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38)
+                        .addComponent(buttonCheckDeterminism1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonConvert, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonSimplify1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(buttonSimplify, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void buttonAddTransitionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddTransitionActionPerformed
+
+        int rowIndex = tableAutomaton.getSelectedRow();
+        int colIndex = tableAutomaton.getSelectedColumn();
+        if (rowIndex >= 0 && colIndex >= 0) {
+            String transitionString = JOptionPane.showInputDialog("Write the transition, If you have more than one transition, separate by commas ','");
+            tableAutomaton.setValueAt(transitionString, rowIndex, colIndex);
+        } else {
+            JOptionPane.showMessageDialog(null, "Seleccione una casilla para agregar las transiciones");
+        }
+
+    }//GEN-LAST:event_buttonAddTransitionActionPerformed
 
     public class MyModel extends DefaultTableModel {
 
@@ -146,6 +212,7 @@ public class AutomatonView extends javax.swing.JFrame {
             }
         }
     }
+
     /**
      * @param args the command line arguments
      */
@@ -183,7 +250,12 @@ public class AutomatonView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Button buttonAddTransition;
+    private java.awt.Button buttonCheckDeterminism1;
+    private java.awt.Button buttonConvert;
+    private java.awt.Button buttonSimplify;
+    private java.awt.Button buttonSimplify1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JTable tableAutomaton;
     // End of variables declaration//GEN-END:variables
 }

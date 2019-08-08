@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.6" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
@@ -23,11 +23,25 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane1" min="-2" pref="553" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="buttonAddTransition" pref="194" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="jScrollPane1" min="-2" pref="553" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="buttonAddTransition" max="32767" attributes="0"/>
+                          <Component id="buttonCheckDeterminism1" alignment="1" pref="258" max="32767" attributes="0"/>
+                          <Component id="buttonConvert" alignment="1" pref="258" max="32767" attributes="0"/>
+                          <Component id="buttonSimplify1" alignment="1" pref="258" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="buttonSimplify" min="-2" pref="375" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jTextField1" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -36,9 +50,22 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="buttonAddTransition" min="-2" pref="49" max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" min="-2" pref="371" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="buttonAddTransition" min="-2" pref="100" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                      <Component id="buttonCheckDeterminism1" min="-2" pref="49" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="buttonConvert" min="-2" pref="49" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="buttonSimplify1" min="-2" pref="49" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="jScrollPane1" pref="0" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="buttonSimplify" max="32767" attributes="0"/>
+                  <Component id="jTextField1" min="-2" pref="47" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -87,6 +114,34 @@
       <Properties>
         <Property name="label" type="java.lang.String" value="Add transition"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonAddTransitionActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="java.awt.Button" name="buttonSimplify">
+      <Properties>
+        <Property name="label" type="java.lang.String" value="Check the automaton"/>
+      </Properties>
+    </Component>
+    <Component class="java.awt.Button" name="buttonCheckDeterminism1">
+      <Properties>
+        <Property name="label" type="java.lang.String" value="Determinism or non-determinism"/>
+      </Properties>
+    </Component>
+    <Component class="java.awt.Button" name="buttonConvert">
+      <Properties>
+        <Property name="label" type="java.lang.String" value="Convert to deterministic automaton"/>
+      </Properties>
+    </Component>
+    <Component class="java.awt.Button" name="buttonSimplify1">
+      <Properties>
+        <Property name="label" type="java.lang.String" value="Simplify automaton"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jTextField1">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField1ActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
