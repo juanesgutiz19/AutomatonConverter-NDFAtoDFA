@@ -1,13 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package practicaunoteoria;
 
 import java.util.ArrayList;
 
-/**
+/*
  * Class Finite Automaton: Es válida tanto para determinísticos como para no determinísticos, por lo 
  * que tiene un arraylist de arraylist de Strings de transiciones, lo que conlleva a poder tener una sola 
  * transición o más.
@@ -87,7 +83,6 @@ public class FA {
     public ArrayList<ArrayList<String>> getTransitions() {
         return transitions;
     }
-
     
     
     public void setTransitions(ArrayList<ArrayList<String>> transitions) {

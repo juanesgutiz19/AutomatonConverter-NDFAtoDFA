@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package practicaunoteoria;
 
 import javax.swing.JOptionPane;
@@ -155,6 +151,10 @@ public class GeneratorView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_textFieldInputSymbolsActionPerformed
 
+    
+    /*
+     * Genera la tabla del autómata solamente con los símbolos de entrada y los estados (Las transiciones aún no) 
+     */
     private void buttonGenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGenerateActionPerformed
         if (textFieldInputSymbols.getText().equals("")) {
             JOptionPane.showMessageDialog(null,"Please enter the input symbols ");
@@ -165,17 +165,8 @@ public class GeneratorView extends javax.swing.JFrame {
         if (!textFieldInputSymbols.getText().equals("") && !textFieldStates.getText().equals("")) {
             String[] states = textFieldStates.getText().split(",");
             String[] inputSymbols = textFieldInputSymbols.getText().split(",");
-            /*
-            if (automatonController.isFirstStateInitial(states)) {
-                AutomatonView a = new AutomatonView(states,inputSymbols);
-                a.setVisible(true);
-            }else {
-                JOptionPane.showMessageDialog(null,"The first state must be the initial state");
-            }
-            */
-            
-             AutomatonView a = new AutomatonView(states,inputSymbols);
-             a.setVisible(true);
+            AutomatonView a = new AutomatonView(states,inputSymbols);
+            a.setVisible(true);
         }
     }//GEN-LAST:event_buttonGenerateActionPerformed
 
