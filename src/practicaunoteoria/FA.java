@@ -42,6 +42,7 @@ public class FA {
         this.inputSymbols = inputSymbols;
     }
     
+    
     public State getState(String state){
         for (int j = 0; j < states.size(); j++) 
             if (states.get(j).getNameState().equals(state)) return states.get(j);                    
@@ -56,6 +57,7 @@ public class FA {
         this.inputSymbols = inputSymbols;
     }
 
+    
     public FA(ArrayList<State> states, ArrayList<String> inputSymbols) {
         this.states = states;
         this.inputSymbols = inputSymbols;
@@ -73,6 +75,10 @@ public class FA {
     public boolean isContainsNullSecuence() {
         return containsNullSecuence;
     }
+    
+    public void addState(State state){
+        this.states.add(state);
+    }
 
     public void setContainsNullSecuence(boolean containsNullSecuence) {
         this.containsNullSecuence = containsNullSecuence;
@@ -82,6 +88,8 @@ public class FA {
         return transitions;
     }
 
+    
+    
     public void setTransitions(ArrayList<ArrayList<String>> transitions) {
         this.transitions = transitions;
     }

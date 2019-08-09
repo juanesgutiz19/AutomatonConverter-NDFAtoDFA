@@ -1,5 +1,4 @@
 package practicaunoteoria;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -14,7 +13,6 @@ public class AutomatonController {
     public boolean isFirstStateInitial(String[] states) {
         return states[0].contains("!");
     }
-    
     
     public FA getMyAutomaton() {
         return myAutomaton;
@@ -68,8 +66,5 @@ public class AutomatonController {
 
     public void setMyAutomaton(FA myAutomaton) {
         this.myAutomaton = myAutomaton;
-    }
-    
-    
-    
+    }       
 }

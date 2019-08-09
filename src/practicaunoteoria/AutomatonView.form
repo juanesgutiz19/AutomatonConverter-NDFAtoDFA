@@ -31,13 +31,13 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="buttonAddTransition" max="32767" attributes="0"/>
-                          <Component id="buttonCheckDeterminism1" alignment="1" pref="258" max="32767" attributes="0"/>
+                          <Component id="buttonDeterminism" alignment="1" pref="258" max="32767" attributes="0"/>
                           <Component id="buttonConvert" alignment="1" pref="258" max="32767" attributes="0"/>
-                          <Component id="buttonSimplify1" alignment="1" pref="258" max="32767" attributes="0"/>
+                          <Component id="buttonSimplify" alignment="1" pref="258" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="buttonSimplify" min="-2" pref="375" max="-2" attributes="0"/>
+                      <Component id="buttonCheckAutomaton" min="-2" pref="375" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jTextField1" max="32767" attributes="0"/>
                   </Group>
@@ -52,19 +52,19 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="buttonAddTransition" min="-2" pref="100" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                      <Component id="buttonCheckDeterminism1" min="-2" pref="49" max="-2" attributes="0"/>
+                      <Component id="buttonAddTransition" min="-2" pref="97" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                      <Component id="buttonDeterminism" min="-2" pref="49" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="buttonConvert" min="-2" pref="49" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="buttonSimplify1" min="-2" pref="49" max="-2" attributes="0"/>
+                      <Component id="buttonSimplify" min="-2" pref="49" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jScrollPane1" pref="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="buttonSimplify" max="32767" attributes="0"/>
+                  <Component id="buttonCheckAutomaton" max="32767" attributes="0"/>
                   <Component id="jTextField1" min="-2" pref="47" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
@@ -118,25 +118,28 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonAddTransitionActionPerformed"/>
       </Events>
     </Component>
-    <Component class="java.awt.Button" name="buttonSimplify">
+    <Component class="java.awt.Button" name="buttonCheckAutomaton">
       <Properties>
         <Property name="label" type="java.lang.String" value="Check the automaton"/>
       </Properties>
     </Component>
-    <Component class="java.awt.Button" name="buttonCheckDeterminism1">
+    <Component class="java.awt.Button" name="buttonDeterminism">
       <Properties>
         <Property name="label" type="java.lang.String" value="Determinism or non-determinism"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonCheckDeterminism1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonDeterminismActionPerformed"/>
       </Events>
     </Component>
     <Component class="java.awt.Button" name="buttonConvert">
       <Properties>
         <Property name="label" type="java.lang.String" value="Convert to deterministic automaton"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonConvertActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="java.awt.Button" name="buttonSimplify1">
+    <Component class="java.awt.Button" name="buttonSimplify">
       <Properties>
         <Property name="label" type="java.lang.String" value="Simplify automaton"/>
       </Properties>
