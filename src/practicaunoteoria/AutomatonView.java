@@ -1,9 +1,9 @@
-
 package practicaunoteoria;
 
 import practicaunoteoria.resources.QueueFA;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -56,6 +56,43 @@ public class AutomatonView extends javax.swing.JFrame {
         }
     }
 
+    private boolean check() {
+        int c = 0;
+        String[] a;
+        for (int i = 0; i < tableAutomaton.getRowCount(); i++) {
+            for (int j = 1; j < tableAutomaton.getColumnCount() - 1; j++) {
+                String e = (String) tableAutomaton.getValueAt(i, j);
+                if (e != null) {
+                    if (e.contains(",")) {
+                        a = e.split(",");
+                        for (int k = 0; k < a.length; k++) {
+                            if (getSymbolRow(a[i]) == -1) {
+                                return false;
+                            }
+                        }
+                    } else if (getSymbolRow(e) == -1) {
+                        return false;
+                    }
+                } else {
+                    if (c == 0) {
+                        DefaultTableModel model = (DefaultTableModel) tableAutomaton.getModel();
+                        Vector vector = new Vector();
+                        vector.add("E");
+                        automatonController.getMyAutomaton().getInputSymbols().stream().forEach((_item) -> {
+                            vector.add("E");
+                        });
+                        vector.add("R");
+                        model.addRow(vector);
+                        c++;
+                        automatonController.getMyAutomaton().getStates().add(new State("Err", false, false));
+                    }
+                    tableAutomaton.setValueAt("E", i, j);
+                }
+            }
+        }
+        return true;
+    }
+
     public int getSymbolRow(String symbol) {
         int row = -10;
         for (int j = 0; j < tableAutomaton.getRowCount(); j++) {
@@ -88,6 +125,12 @@ public class AutomatonView extends javax.swing.JFrame {
         return false;
     }
 
+    private String getCompositeState(String state, ArrayList<State> states) {
+        for (int i = 0; i < states.size(); i++) 
+            if (states.get(i).getNameState().contains(state)) return states.get(i).getNameState();
+        return "";
+    }
+
     public boolean ItAlreadyExists(ArrayList<String[]> locators, String[] locator) {
         String[] a;
         boolean b = true;
@@ -110,6 +153,23 @@ public class AutomatonView extends javax.swing.JFrame {
         return b;
     }
 
+    public State joinStates(ArrayList<State> states) {
+        boolean initialState = false;
+        boolean aceptingState = false;
+        String r = "";
+        for (int j = 0; j < states.size(); j++) {
+            r = r + states.get(j).getNameState();
+            if (states.get(j).isInitialState()) {
+                initialState = true;
+            }
+            if (states.get(j).isAcceptingState()) {
+                aceptingState = true;
+            }
+        }
+        State state = new State(r, aceptingState, initialState);
+        return state;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -130,7 +190,6 @@ public class AutomatonView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        tableAutomaton.setBackground(new java.awt.Color(255, 255, 255));
         tableAutomaton.setForeground(new java.awt.Color(0, 0, 0));
         tableAutomaton.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -142,7 +201,6 @@ public class AutomatonView extends javax.swing.JFrame {
         ));
         tableAutomaton.setGridColor(new java.awt.Color(254, 254, 254));
         tableAutomaton.setSelectionBackground(new java.awt.Color(0, 120, 215));
-        tableAutomaton.setSelectionForeground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setViewportView(tableAutomaton);
 
         buttonAddTransition.setLabel("Add transition");
@@ -169,6 +227,11 @@ public class AutomatonView extends javax.swing.JFrame {
         });
 
         buttonSimplify.setLabel("Simplify automaton");
+        buttonSimplify.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonSimplifyActionPerformed(evt);
+            }
+        });
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -272,7 +335,10 @@ public class AutomatonView extends javax.swing.JFrame {
             }
         }
     }
-
+    
+    private void simplify() {
+        
+    }
 
     private void buttonConvertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConvertActionPerformed
         try {
@@ -424,9 +490,13 @@ public class AutomatonView extends javax.swing.JFrame {
             addStatesToTable(automatonController.getMyAutomaton().getStates());
             addTransitionsToTable(automatonController.getMyAutomaton().getTransitions());
         } catch (NullPointerException e) {
-            javax.swing.JOptionPane.showMessageDialog(this, "¡Fill in the transitions correctly!");
+            javax.swing.JOptionPane.showMessageDialog(this, "¡Fill the transitions correctly!");
         }
     }//GEN-LAST:event_buttonConvertActionPerformed
+
+    private void buttonSimplifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSimplifyActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonSimplifyActionPerformed
 
     public class MyModel extends DefaultTableModel {
 

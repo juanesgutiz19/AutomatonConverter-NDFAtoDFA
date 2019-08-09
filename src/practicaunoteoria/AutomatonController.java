@@ -78,4 +78,22 @@ public class AutomatonController {
     public void setMyAutomaton(FA myAutomaton) {
         this.myAutomaton = myAutomaton;
     }
+
+    public void setInitialBeginning(ArrayList<ArrayList<State>> setStates) {
+        ArrayList<State> aux1;
+        State aux3;
+        ArrayList<State> aux2;
+        for (int i = 0; i < setStates.size(); i++) {
+            aux1 = setStates.get(i);
+            for (int j = 0; j < aux1.size(); j++) {
+                aux3 = aux1.get(j);
+                if (aux3.isInitialState()) {
+                    aux2 = setStates.get(0);
+                    setStates.set(0, aux1);
+                    setStates.set(i, aux2);
+                    return;
+                }
+            }
+        }
+    }
 }
