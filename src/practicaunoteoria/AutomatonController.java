@@ -61,24 +61,6 @@ public class AutomatonController {
         myAutomaton.setStates(automatonStates);
     }
 
-    public void setSymbols(String[] symbols) {
-        ArrayList<String> automatonSymbols = new ArrayList<>();
-        automatonSymbols.addAll(Arrays.asList(symbols));
-        myAutomaton.setInputSymbols(automatonSymbols);
-    }
-
-    public void setTransitions(ArrayList<ArrayList<String>> transitions) {
-        myAutomaton.setTransitions(transitions);
-    }
-
-    public ArrayList<ArrayList<String>> getTransitions() {
-        return myAutomaton.getTransitions();
-    }
-
-    public void setMyAutomaton(FA myAutomaton) {
-        this.myAutomaton = myAutomaton;
-    }
-
     public void setInitialBeginning(ArrayList<ArrayList<State>> setStates) {
         ArrayList<State> aux1;
         State aux3;
@@ -95,5 +77,35 @@ public class AutomatonController {
                 }
             }
         }
+    }
+
+    public void setSymbols(String[] symbols) {
+        ArrayList<String> automatonSymbols = new ArrayList<>();
+        automatonSymbols.addAll(Arrays.asList(symbols));
+        myAutomaton.setInputSymbols(automatonSymbols);
+    }
+
+    public void separateStates(ArrayList<ArrayList<State>> setStates) {
+        ArrayList<State> Astates = new ArrayList<>();
+        ArrayList<State> Rstates = new ArrayList<>();
+        for (int i = 0; i < myAutomaton.getStates().size(); i++) 
+            if (myAutomaton.getStates().get(i).isAcceptingState()) 
+                Rstates.add(myAutomaton.getStates().get(i));
+             else 
+                Astates.add(myAutomaton.getStates().get(i));
+        setStates.add(Astates);
+        setStates.add(Rstates);
+    }
+
+    public void setTransitions(ArrayList<ArrayList<String>> transitions) {
+        myAutomaton.setTransitions(transitions);
+    }
+
+    public ArrayList<ArrayList<String>> getTransitions() {
+        return myAutomaton.getTransitions();
+    }
+
+    public void setMyAutomaton(FA myAutomaton) {
+        this.myAutomaton = myAutomaton;
     }
 }
