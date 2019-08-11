@@ -64,8 +64,8 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <Component id="jScrollPane1" min="-2" pref="609" max="-2" attributes="0"/>
-                  <EmptySpace pref="28" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" pref="619" max="32767" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jButton1" min="-2" pref="42" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
               </Group>
@@ -96,7 +96,7 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="rows" type="int" value="5"/>
-                <Property name="text" type="java.lang.String" value="&#x9;&#x9;      &#x9;     About AutomatonApp...&#xa; "/>
+                <Property name="text" type="java.lang.String" value="&#x9;&#x9;      &#x9;     &#xa;                              Acerca de AutomatonApp&#xa; &#xa; Para iniciar, una definici&#xf3;n formal de los aut&#xf3;matas finitos es que son &#xa; m&#xe1;quinas te&#xf3;ricas que van cambiando de estado dependiendo de la entrada que &#xa; reciban. La salida de estos aut&#xf3;matas est&#xe1; limitada a dos valores: aceptado &#xa; y no aceptado, que pueden indicar si la cadena que se ha recibido como &#xa; entrada es o no v&#xe1;lida. Generalmente se utilizan los aut&#xf3;matas finitos para &#xa; reconocer lenguajes regulares, es decir, una palabra se considerar&#xe1; v&#xe1;lida &#xa; s&#xf3;lo si pertenece a un determinado lenguaje.&#xa; &#xa; &#xa; AutomatonApp se encarga de crear un aut&#xf3;mata finito con base en los estados,&#xa; s&#xed;mbolos de entrada y transiciones que el usuario ingrese. Adem&#xe1;s el usuario&#xa; tiene la opci&#xf3;n de poder saber si el aut&#xf3;mata finito es determin&#xed;stico o no &#xa; determin&#xed;stico. Si es no determin&#xed;stico este lo puede convertir a &#xa; determin&#xed;stico, al convertirlo, el usuario puede simplificarlo si as&#xed; lo &#xa; desea. Por &#xfa;ltimo se puede comprobar el aut&#xf3;mata, es decir, que el usuario &#xa; puede ingresar una hilera y el programa determina si el aut&#xf3;mata entrado &#xa; inicialmente acepta o rechaza la hilera entrada.&#xa;&#xa; &#xa; Algo muy importante para el buen funcionamiento de la aplicaci&#xf3;n es que para &#xa; ingresar el aut&#xf3;mata, los s&#xed;mbolos de entrada deben separarse por comas.&#xa; Para entrar los estados, deben estar igualmente separados por comas, el &#xa; estado inicial debe ser el primero y debe incluir un s&#xed;mbolo de exclamaci&#xf3;n &quot;!&quot; &#xa; al final. Adem&#xe1;s si es un estado de aceptaci&#xf3;n debe incluir un punto &quot;.&quot;&#xa; Un ejemplo es: &#xa; Input symbols: 0,1&#xa; States: .A!,B,.C&#xa; En este caso los s&#xed;mbolos de entrada son el 0 y el 1, el A es el estado &#xa; inicial y estado de aceptaci&#xf3;n, al igual que el C.&#xa; El estado B es de rechazo puesto que no tiene un &quot;.&quot; al inicio."/>
               </Properties>
             </Component>
           </SubComponents>

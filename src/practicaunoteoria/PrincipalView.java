@@ -28,57 +28,47 @@ public class PrincipalView extends javax.swing.JFrame {
         buttonExit = new java.awt.Button();
         buttonStart = new java.awt.Button();
         buttonAbout = new java.awt.Button();
+        labelFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        buttonExit.setBackground(new java.awt.Color(229, 44, 45));
+        buttonExit.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        buttonExit.setForeground(new java.awt.Color(255, 255, 255));
         buttonExit.setLabel("Exit");
         buttonExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonExitActionPerformed(evt);
             }
         });
+        getContentPane().add(buttonExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 100, 60));
 
+        buttonStart.setBackground(new java.awt.Color(44, 64, 166));
+        buttonStart.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        buttonStart.setForeground(new java.awt.Color(255, 255, 255));
         buttonStart.setLabel("¡Let's start!");
         buttonStart.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonStartActionPerformed(evt);
             }
         });
+        getContentPane().add(buttonStart, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 280, 140, 60));
 
-        buttonAbout.setLabel("About Automaton App");
+        buttonAbout.setBackground(new java.awt.Color(44, 64, 166));
+        buttonAbout.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        buttonAbout.setForeground(new java.awt.Color(255, 255, 255));
+        buttonAbout.setLabel("About AutomatonApp");
         buttonAbout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonAboutActionPerformed(evt);
             }
         });
+        getContentPane().add(buttonAbout, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 210, 60));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(buttonAbout, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(buttonExit, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 269, Short.MAX_VALUE)
-                        .addComponent(buttonStart, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(buttonAbout, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 178, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(buttonStart, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
-                    .addComponent(buttonExit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
+        labelFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/practicaunoteoria/resources/backgroundPrincipal.jpg"))); // NOI18N
+        getContentPane().add(labelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -87,17 +77,17 @@ public class PrincipalView extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_buttonExitActionPerformed
 
-    private void buttonStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonStartActionPerformed
-        GeneratorView g = new GeneratorView();
-        g.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_buttonStartActionPerformed
-
     private void buttonAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAboutActionPerformed
         aboutAutomaton a = new aboutAutomaton();
         a.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_buttonAboutActionPerformed
+
+    private void buttonStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonStartActionPerformed
+        GeneratorView g = new GeneratorView();
+        g.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_buttonStartActionPerformed
 
     /**
      * @param args the command line arguments
@@ -138,5 +128,6 @@ public class PrincipalView extends javax.swing.JFrame {
     private java.awt.Button buttonAbout;
     private java.awt.Button buttonExit;
     private java.awt.Button buttonStart;
+    private javax.swing.JLabel labelFondo;
     // End of variables declaration//GEN-END:variables
 }

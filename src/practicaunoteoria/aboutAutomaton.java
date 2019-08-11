@@ -43,7 +43,7 @@ public class aboutAutomaton extends javax.swing.JFrame {
         jTextArea1.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
         jTextArea1.setForeground(new java.awt.Color(255, 255, 255));
         jTextArea1.setRows(5);
-        jTextArea1.setText("\t\t      \t     About AutomatonApp...\n ");
+        jTextArea1.setText("\t\t      \t     \n                              Acerca de AutomatonApp\n \n Para iniciar, una definición formal de los autómatas finitos es que son \n máquinas teóricas que van cambiando de estado dependiendo de la entrada que \n reciban. La salida de estos autómatas está limitada a dos valores: aceptado \n y no aceptado, que pueden indicar si la cadena que se ha recibido como \n entrada es o no válida. Generalmente se utilizan los autómatas finitos para \n reconocer lenguajes regulares, es decir, una palabra se considerará válida \n sólo si pertenece a un determinado lenguaje.\n \n \n AutomatonApp se encarga de crear un autómata finito con base en los estados,\n símbolos de entrada y transiciones que el usuario ingrese. Además el usuario\n tiene la opción de poder saber si el autómata finito es determinístico o no \n determinístico. Si es no determinístico este lo puede convertir a \n determinístico, al convertirlo, el usuario puede simplificarlo si así lo \n desea. Por último se puede comprobar el autómata, es decir, que el usuario \n puede ingresar una hilera y el programa determina si el autómata entrado \n inicialmente acepta o rechaza la hilera entrada.\n\n \n Algo muy importante para el buen funcionamiento de la aplicación es que para \n ingresar el autómata, los símbolos de entrada deben separarse por comas.\n Para entrar los estados, deben estar igualmente separados por comas, el \n estado inicial debe ser el primero y debe incluir un símbolo de exclamación \"!\" \n al final. Además si es un estado de aceptación debe incluir un punto \".\"\n Un ejemplo es: \n Input symbols: 0,1\n States: .A!,B,.C\n En este caso los símbolos de entrada son el 0 y el 1, el A es el estado \n inicial y estado de aceptación, al igual que el C.\n El estado B es de rechazo puesto que no tiene un \".\" al inicio.");
         jScrollPane1.setViewportView(jTextArea1);
 
         jButton1.setBackground(new java.awt.Color(0, 102, 255));
@@ -76,8 +76,8 @@ public class aboutAutomaton extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 609, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 619, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25))
         );
@@ -137,6 +137,18 @@ public class aboutAutomaton extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(aboutAutomaton.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>

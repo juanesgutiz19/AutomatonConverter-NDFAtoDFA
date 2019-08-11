@@ -191,6 +191,7 @@ public class AutomatonView extends javax.swing.JFrame {
         textFieldString = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         tableAutomaton.setForeground(new java.awt.Color(0, 0, 0));
         tableAutomaton.setModel(new javax.swing.table.DefaultTableModel(
@@ -334,6 +335,7 @@ public class AutomatonView extends javax.swing.JFrame {
             if (nonDeterministic) {
                 javax.swing.JOptionPane.showMessageDialog(this, "¡The automaton entered is non-deterministic!");
             } else {
+                
                 javax.swing.JOptionPane.showMessageDialog(this, "¡The automaton entered is deterministic!");
             }
         } catch (NullPointerException e) {
@@ -601,6 +603,11 @@ public class AutomatonView extends javax.swing.JFrame {
                     + " (Preferiblemente la primera fila). ");
         }
     }
+    
+    public void disableConvertButton(){
+       buttonConvert.setVisible(false);
+    }
+    
     private void buttonSimplifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSimplifyActionPerformed
         if (check()) {
             try {
