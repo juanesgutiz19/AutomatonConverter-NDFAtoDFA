@@ -27,11 +27,21 @@ public class AutomatonView extends javax.swing.JFrame {
     private String[] states;
     private FA automaton;
 
+    /**
+     * Constructor sin parámetros en donde se inicial los componentes del JFrame. Además la pantalla se ubica en el centro.
+     */
     public AutomatonView() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
 
+    /**
+     * Constructor con parámetros, se inicial el JFrame, se inicializa el autómata finito y se llama al
+     * método para mostrar el autómata.
+     * 
+     * @param states
+     * @param inputSymbols 
+     */
     public AutomatonView(String[] states, String[] inputSymbols) {
         this.getContentPane().setBackground(new Color(240, 249, 6));
         this.setResizable(false);
@@ -44,6 +54,13 @@ public class AutomatonView extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
     }
 
+    /**
+     * Método que muestra el autómata finito a través de un JTable con base en los arreglos llamados
+     * estados y símbolos de entrada.
+     * 
+     * @param states
+     * @param inputSymbols 
+     */
     public void showAutomaton(String[] states, String[] inputSymbols) {
         addRowsToTable(states.length, inputSymbols.length);
         automatonController.setStates(states);
@@ -52,6 +69,13 @@ public class AutomatonView extends javax.swing.JFrame {
         addStatesToTable(automatonController.getMyAutomaton().getStates());
     }
 
+    /**
+     * Método que añade las columnas correspondientes al JTable en donde se muestra el 
+     * autómata finito.
+     * 
+     * @param rows
+     * @param columns 
+     */
     public void addRowsToTable(int rows, int columns) {
         String i = new String();
         String j = "";
@@ -64,6 +88,13 @@ public class AutomatonView extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Método que retorna verdadero si las transiciones ingresadas por el usuario son válidas
+     * Si no son válidas el programa pone en cada casilla de la tabla una "E" que indica 
+     * error.
+     * 
+     * @return 
+     */
     private boolean check() {
         int c = 0;
         String[] a;
@@ -101,16 +132,27 @@ public class AutomatonView extends javax.swing.JFrame {
         return true;
     }
 
+    /**
+     * El método retorna la fila en la cual se encuentra un símbolo pasado como parámetro
+     * Si no encuentra el símbolo retorna un -10.
+     * 
+     * @param symbol
+     * @return 
+     */
     public int getSymbolRow(String symbol) {
         int row = -10;
-        for (int j = 0; j < tableAutomaton.getRowCount(); j++) {
-            if (tableAutomaton.getValueAt(j, 0).toString().equals(symbol)) {
-                row = j;
-            }
-        }
+        for (int j = 0; j < tableAutomaton.getRowCount(); j++) 
+            if (tableAutomaton.getValueAt(j, 0).toString().equals(symbol)) 
+                row = j;  
         return row;
     }
 
+    /**
+     * Método que añade a la tabla, por cada estado de cada columna del JTable 
+     * si es un estado de aceptación (A) o un estado de rechazo (R).
+     * 
+     * @param states 
+     */
     public void addStatesToTable(ArrayList<State> states) {
         DefaultTableModel m = (DefaultTableModel) tableAutomaton.getModel();
         m.addColumn("A/R");
@@ -124,6 +166,13 @@ public class AutomatonView extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Método que nos dice si cierto estado ya pertence al arreglo de procesados. 
+     * 
+     * @param processed
+     * @param state
+     * @return 
+     */
     public boolean ItWasProcessed(ArrayList<String> processed, String state) {
         for (int j = 0; j < processed.size(); j++) {
             if (processed.get(j).contains(state)) {
@@ -133,14 +182,41 @@ public class AutomatonView extends javax.swing.JFrame {
         return false;
     }
 
+    /**
+     * Método que recorre las transiciones del autómata partiendo desde el initial state solamente
+     * añadiendo las transiciones a las que llega el autómata finito, a las que no llega las omite.
+     * 
+     * @param visited
+     * @param vertex 
+     */
+    private void automatonPath(ArrayList<State> visited, State vertex) {
+        State auxiliaryState;
+        visited.add(vertex);
+        for (int i = 1; i < tableAutomaton.getColumnCount() - 1; i++) {
+            auxiliaryState = automatonController.getMyAutomaton().getState((String) tableAutomaton.getValueAt(getSymbolRow(vertex.getNameState()), i));
+            if (!visited.contains(auxiliaryState)) 
+                automatonPath(visited, auxiliaryState);
+        }
+    }
+    
+    /**
+     * Método que vacía el JTable donde se muestra el autómata.
+     */
     public void emptyTable() {
         for (int i = 0; i < tableAutomaton.getRowCount(); i++) {
-            for (int j = 1; j < tableAutomaton.getColumnCount() - 1; j++) {
-                tableAutomaton.setValueAt("", i, j);
-            }
+            for (int j = 1; j < tableAutomaton.getColumnCount() - 1; j++) 
+                tableAutomaton.setValueAt("", i, j);            
         }
     }
 
+    /**
+     * Método que nos dice si un elemento del arreglo de string locator, se encuentra 
+     * en el arreglo de arreglos de string llamado locators.
+     * 
+     * @param locators
+     * @param locator
+     * @return 
+     */
     public boolean ItAlreadyExists(ArrayList<String[]> locators, String[] locator) {
         String[] a;
         boolean b = true;
@@ -151,31 +227,31 @@ public class AutomatonView extends javax.swing.JFrame {
             } else {
                 b = true;
                 for (int j = 0; j < locator.length; j++) {
-                    if (!locator[j].equals(a[j])) {
-                        b = false;
-                    }
+                    if (!locator[j].equals(a[j])) b = false;   
                 }
-                if (b) {
-                    return b;
-                }
+                if (b) return b;   
             }
         }
         return b;
     }
 
+    /**
+     * Método que une a los estados que se pasan en el arreglo llamado states que se
+     * pasa como parámetro.
+     * 
+     * @param states
+     * @return 
+     */
     public State joinStates(ArrayList<State> states) {
         boolean initialState = false;
         boolean aceptingState = false;
         String r = "";
         for (int j = 0; j < states.size(); j++) {
             r = r + states.get(j).getNameState();
-            if (states.get(j).isInitialState()) {
+            if (states.get(j).isInitialState()) 
                 initialState = true;
-            }
-
-            if (states.get(j).isAcceptingState()) {
+            if (states.get(j).isAcceptingState()) 
                 aceptingState = true;
-            }
         }
         State state = new State(r, aceptingState, initialState);
         return state;
@@ -315,7 +391,16 @@ public class AutomatonView extends javax.swing.JFrame {
 
     }//GEN-LAST:event_textFieldStringActionPerformed
 
+    /**
+     * Al presionar el botón se añade una nueva transición al autómata
+     * Algo que se debe tener en cuenta y es sumamente importante es que 
+     * para añadir la transición se debe presionar primero la casilla,
+     * y los estados deben estar separados por comas.
+     * 
+     * @param evt 
+     */
     private void buttonAddTransitionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddTransitionActionPerformed
+
         int rowIndex = tableAutomaton.getSelectedRow();
         int colIndex = tableAutomaton.getSelectedColumn();
         if (rowIndex >= 0 && colIndex >= 0) {
@@ -326,15 +411,20 @@ public class AutomatonView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_buttonAddTransitionActionPerformed
 
+    /**
+     * Al presionar el botón se determina si el autómata finito es determinístico o no determinístico
+     * solo basta con comprobar si la transición de al menos un estado contiene dos o más transiciones, 
+     * si pasa esto el autómata es no determinístico.
+     * 
+     * @param evt 
+     */
     private void buttonDeterminismActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeterminismActionPerformed
         try {
             boolean nonDeterministic = false;
             for (int i = 0; i < tableAutomaton.getRowCount(); i++) {
-                for (int j = 1; j < tableAutomaton.getColumnCount() - 1; j++) {
-                    if (tableAutomaton.getValueAt(i, j).toString().contains(",")) {
+                for (int j = 1; j < tableAutomaton.getColumnCount() - 1; j++) 
+                    if (tableAutomaton.getValueAt(i, j).toString().contains(",")) 
                         nonDeterministic = true;
-                    }
-                }
             }
             if (nonDeterministic) {
                 javax.swing.JOptionPane.showMessageDialog(this, "¡The automaton entered is non-deterministic!");
@@ -347,41 +437,56 @@ public class AutomatonView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_buttonDeterminismActionPerformed
 
+    /**
+     * Método que añade la columna de estados y añade los símbolos que se pasan como parámetro
+     * que son los estados del autómata.
+     * 
+     * @param symbols 
+     */
     public void addSymbolsToTable(ArrayList<String> symbols) {
         DefaultTableModel m = (DefaultTableModel) tableAutomaton.getModel();
         m.addColumn("States");
-        for (int j = 0; j < symbols.size(); j++) {
-            m.addColumn(symbols.get(j));
-        }
+        for (int j = 0; j < symbols.size(); j++) 
+            m.addColumn(symbols.get(j));        
     }
 
+    /**
+     * Método que añade las transiciones al JTable con base en el arreglo de arreglo de strings
+     * de transiciones, es así porque puede ser un autómata finito determinístico o no determinístico.
+     * 
+     * @param transitions 
+     */
     private void addTransitionsToTable(ArrayList<ArrayList<String>> transitions) {
         for (int i = 0; i < transitions.size(); i++) {
             ArrayList<String> transitions1 = transitions.get(i);
-            for (int j = 0; j < transitions1.size(); j++) {
-                tableAutomaton.setValueAt(transitions1.get(j), i, j + 1);
-            }
+            for (int j = 0; j < transitions1.size(); j++) 
+                tableAutomaton.setValueAt(transitions1.get(j), i, j + 1);           
         }
     }
 
+    /**
+     * Método que devuelve un arreglo con los estados que no son extraños. 
+     * De esta forma se facilita el proceso de simplificación del autómata.
+     * 
+     * @return 
+     */
     private ArrayList<State> arentStrangers() {
         ArrayList<State> visited = new ArrayList<>();
         automatonPath(visited, automatonController.getMyAutomaton().getState((String) tableAutomaton.getValueAt(0, 0)));
         return visited;
     }
 
-    private void automatonPath(ArrayList<State> visited, State vertex) {
-        State auxiliaryState;
-        visited.add(vertex);
-        for (int i = 1; i < tableAutomaton.getColumnCount() - 1; i++) {
-            auxiliaryState = automatonController.getMyAutomaton().getState((String) tableAutomaton.getValueAt(getSymbolRow(vertex.getNameState()), i));
-            if (!visited.contains(auxiliaryState)) {
-                automatonPath(visited, auxiliaryState);
-            }
-        }
-    }
-
-
+    /**
+     * Al presionar, convierte el autómata finito no determinístico a un autómata finito determinístico.
+     * Inicialmente se procesan las transiciones del estado inicial, asu vez se verifica si son determinísticas o no
+     * Con base a esto se crea el estado unión de las transiciones que no son determinísticas, estas transiciones se agregan 
+     * a una cola para que posteriormente puedan ser procesadas. En el procesamiento de los estados en la cola, 
+     * si el estado es nuevo, es decir no había otro estado con ese mismo nombre, se realizan sus transiciones y posteriormente 
+     * se hace el procesamiento para crear nuevos estados con la unión de las tranciones estos estados. Ya si el estado en la cola
+     * no viene de la unión de dos estados se lleva a cabo de la misma manera que con el estado inicial.
+     * 
+     * @param evt 
+     */
     private void buttonConvertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConvertActionPerformed
         try {
             ArrayList<String[]> indicators = new ArrayList<>();
@@ -535,24 +640,44 @@ public class AutomatonView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_buttonConvertActionPerformed
 
+    /**
+     * Retorna verdadero si el estado pertence al conjunto que se manda 
+     * como parámetro.
+     * 
+     * @param set
+     * @param state
+     * @return 
+     */
     public boolean stateBelongsToSet(ArrayList<State> set, String state) {
-        for (int i = 0; i < set.size(); i++) {
-            if (set.get(i).getNameState().contentEquals(state)) {
+        for (int i = 0; i < set.size(); i++) 
+            if (set.get(i).getNameState().contentEquals(state)) 
                 return true;
-            }
-        }
         return false;
     }
 
+    /**
+     * Retorna el estado compuesto, este es el resultado de unir o juntar dos o más 
+     * estados de un autómata.
+     * 
+     * @param state
+     * @param states
+     * @return 
+     */
     private String getCompositeState(String state, ArrayList<State> states) {
-        for (int i = 0; i < states.size(); i++) {
-            if (states.get(i).getNameState().contains(state)) {
+        for (int i = 0; i < states.size(); i++) 
+            if (states.get(i).getNameState().contains(state)) 
                 return states.get(i).getNameState();
-            }
-        }
         return "";
     }
 
+    /**
+     * Método que retorna verdadero si un estado pertenece a un conjunto que se manda como 
+     * parámetro.
+     * 
+     * @param sets
+     * @param states
+     * @return 
+     */
     public boolean statesBelong(ArrayList<ArrayList<State>> sets, ArrayList<String> states) {
         String test;
         ArrayList<State> set;
@@ -560,22 +685,22 @@ public class AutomatonView extends javax.swing.JFrame {
         for (int i = 0; i < sets.size(); i++) {
             set = sets.get(i);
             test = "";
-            for (int j = 0; j < set.size(); j++) {
+            for (int j = 0; j < set.size(); j++) 
                 test = test + set.get(j).getNameState();
-            }
             c = 0;
-            for (int j = 0; j < states.size(); j++) {
-                if (test.contains(states.get(j))) {
+            for (int j = 0; j < states.size(); j++) 
+                if (test.contains(states.get(j))) 
                     c++;
-                }
-            }
-            if (c == states.size()) {
-                return true;
-            }
+            if (c == states.size()) return true;       
         }
         return false;
     }
 
+    /**
+     * Método que agrega las transiciones del autómata a un JTable.
+     * 
+     * @param table 
+     */
     public void addTransitions(JTable table) {
         try {
             ArrayList<ArrayList<String>> transitions1 = new ArrayList<>();
@@ -585,7 +710,7 @@ public class AutomatonView extends javax.swing.JFrame {
                 transitions2 = new ArrayList<>();
                 for (int j = 1; j < table.getColumnCount() - 1; j++) {
                     if (!automatonController.belongsToStates(automatonController.getMyAutomaton().getStates(), table.getValueAt(i, j).toString())) {
-                        javax.swing.JOptionPane.showMessageDialog(this, "Las transiciones ingresadas no son correctas. ");
+                        javax.swing.JOptionPane.showMessageDialog(this, "The transitions entered are not correct");
                         emptyTable();
                         c++;
                         break;
@@ -600,18 +725,31 @@ public class AutomatonView extends javax.swing.JFrame {
                 }
             }
             automatonController.setTransitions(transitions1);
-
         } catch (NullPointerException e) {
             e.printStackTrace();
-            javax.swing.JOptionPane.showMessageDialog(this, "Por favor de click en otra parte de la ventana\n"
-                    + " (Preferiblemente la primera fila). ");
+            javax.swing.JOptionPane.showMessageDialog(this, "Click on another part of the screen");
         }
     }
 
+    /**
+     * Método que desactiva el botón para convertir el autómata no determinístico a determinístico.
+     */
     public void disableConvertButton() {
         buttonConvert.setVisible(false);
     }
 
+    /**
+     * Método que simplifica un autómata finito determinístico. 
+     * Lo primero que se hace es recuperar solamente los estados que no son extraños. Esto es fundamental para iniciar el 
+     * proceso de simplificación eficazmente. Ya teniendo solo los estados que no son extraños se procede a separar los estados
+     * en dos conjuntos: Los de aceptación y los de rechazo. Se realiza el proceso para poder determinar si se debe partir cada conjunto.
+     * Luego se juntan los estados para los cuales el símbolo de entrada de sus transiciones pertenecen a un mismo conjunto.
+     * Se hace el mismo teniendo en cuenta los nuevos conjuntos. Se hace el mismo proceso hasta que a los conjuntos no se les pueda realizar
+     * más divisiones.
+     * 
+     * 
+     * @param evt 
+     */
     private void buttonSimplifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSimplifyActionPerformed
         if (check()) {
             try {
@@ -679,7 +817,6 @@ public class AutomatonView extends javax.swing.JFrame {
                 for (int i = 0; i < setStates.size(); i++) {
                     auxiliaryStates.add(joinStates(setStates.get(i)));
                 }
-
                 ArrayList<ArrayList<String>> transicionesAux = new ArrayList<>();
                 ArrayList<String> transicionesFE;
                 State constTransiciones;
@@ -712,6 +849,12 @@ public class AutomatonView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_buttonSimplifyActionPerformed
 
+    /**
+     * Al presionar el botón nos dice si una hilera ingresada por el usuario es aceptada o no por el autómata finito.
+     * Para ello se llama al método checkString que se encuentra en la clase AutomatonController.
+     * 
+     * @param evt 
+     */
     private void buttonCheckAutomatonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCheckAutomatonActionPerformed
         try {
             String string = textFieldString.getText();
@@ -734,6 +877,10 @@ public class AutomatonView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_buttonCheckAutomatonActionPerformed
 
+    /**
+     * Clase que nos permite poder hacer operaciones con un JTable
+     * nos permite editar la tabla.
+     */
     public class MyModel extends DefaultTableModel {
 
         @Override

@@ -158,7 +158,7 @@ public class FA {
     }
 
     /**
-     * Métpdp que establece los estados de un autómata.
+     * Método que establece los estados de un autómata.
      * 
      * @param states 
      */

@@ -94,7 +94,7 @@ public class GeneratorView extends javax.swing.JFrame {
         jLabel4.setText("The input symbols and states must be separated by commas \",\" ");
 
         jLabel5.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
-        jLabel5.setText("For the other states, if it is an acceptance state, it must appear after a point \".\"");
+        jLabel5.setText("For all the states, if it is an acceptance state, it must appear after a point \".\"");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
