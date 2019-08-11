@@ -2,8 +2,13 @@
 package practicaunoteoria;
 
 /**
- *
- * @author Juan Gutierrez
+ * JFrame donde se visualizan las opciones que tiene el usuario al inicio.
+ * Entre esas opciones está salirse de la aplicación, poder ver una pequeña 
+ * explicación de la aplicación, y la última poderse dirigir al generador 
+ * del autómata.
+ * 
+ * @author Andrés Quintero
+ * @author Juan Esteban Gutiérrez
  */
 public class PrincipalView extends javax.swing.JFrame {
 
@@ -73,16 +78,32 @@ public class PrincipalView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Al presionar el botón se cierra la aplicación.
+     * 
+     * @param evt 
+     */
     private void buttonExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExitActionPerformed
         System.exit(0);
     }//GEN-LAST:event_buttonExitActionPerformed
 
+    /**
+     * Al presionar el botón se cierra la pantalla actual y se abre la pantalla que explica brevemente 
+     * el funcionamiento de la aplicación.
+     * 
+     * @param evt 
+     */
     private void buttonAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAboutActionPerformed
         aboutAutomaton a = new aboutAutomaton();
         a.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_buttonAboutActionPerformed
 
+    /**
+     * Al presionar el botón se cierra la pantalla actual y se abre la pantalla para generar el autómata.
+     * 
+     * @param evt 
+     */
     private void buttonStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonStartActionPerformed
         GeneratorView g = new GeneratorView();
         g.setVisible(true);

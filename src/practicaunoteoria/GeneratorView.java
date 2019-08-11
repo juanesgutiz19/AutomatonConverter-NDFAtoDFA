@@ -5,8 +5,11 @@ import java.awt.Color;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author Juan Gutierrez
+ * JFrame donde se genera la plantilla del autómata. Plantilla porque no se genera el autómata en su totalidad,
+ * solo se genera la tabla con los estados y símbolos de entrada que defina el usuario.
+ * 
+ * @author Andrés Quintero
+ * @author Juan Esteban Gutiérrez
  */
 public class GeneratorView extends javax.swing.JFrame {
 
@@ -16,6 +19,10 @@ public class GeneratorView extends javax.swing.JFrame {
     
     AutomatonController automatonController;
     
+    /**
+     * Se inicializan los componentes de la aplicación.
+     * Se establece un color de fondo y se centra.
+     */
     public GeneratorView() {
         this.getContentPane().setBackground(new Color(30, 144, 255));
         this.setResizable(false);
@@ -177,7 +184,7 @@ public class GeneratorView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void textFieldInputSymbolsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldInputSymbolsActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_textFieldInputSymbolsActionPerformed
 
     
@@ -199,6 +206,11 @@ public class GeneratorView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_buttonGenerateActionPerformed
 
+    /**
+     * Al presionar el botón se vuelve a la pantalla principal.
+     * 
+     * @param evt 
+     */
     private void buttonComeBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonComeBackActionPerformed
         PrincipalView p = new PrincipalView();
         p.setVisible(true);

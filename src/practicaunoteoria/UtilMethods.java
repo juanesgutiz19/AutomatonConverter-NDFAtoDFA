@@ -4,13 +4,48 @@ package practicaunoteoria;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author User
+ * Clase con métodos útiles que fueron usados en el desarrollo.
+ * Una clase muy útil para el desarrollo de cualquier tipo de 
+ * aplicación.
+ * 
+ * @author Andrés Quintero
+ * @author Juan Esteban Gutiérrez
  */
 public class UtilMethods {
 
     private static String lector;
 
+    
+    /**
+     * Se concatenan dos string.
+     * 
+     * @param text
+     * @param symbol
+     * @return 
+     */
+    public static String concatString(String text, String symbol) {
+        String[] array = text.split(symbol);
+        String result = "";
+        for (int i = 0; i < array.length; i++) {
+            result = result + array[i];
+        }
+        return result;
+    }
+    
+    /**
+     * Se convierte un arreglo a un String.
+     * 
+     * @param array
+     * @return 
+     */
+    public static String toString(String[] array) {
+        String result = "";
+        for (String array1 : array) {
+            result = result + array1;
+        }
+        return result;
+    }
+    
     private UtilMethods() {
     }
 
@@ -77,20 +112,5 @@ public class UtilMethods {
 
     }
     
-    public static String concatString(String text, String symbol) {
-        String[] array = text.split(symbol);
-        String result = "";
-        for (int i = 0; i < array.length; i++) {
-            result = result + array[i];
-        }
-        return result;
-    }
     
-    public static String toString(String[] array) {
-        String result = "";
-        for (String array1 : array) {
-            result = result + array1;
-        }
-        return result;
-    }
 }

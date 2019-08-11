@@ -8,7 +8,7 @@ package practicaunoteoria;
 public class aboutAutomaton extends javax.swing.JFrame {
 
     /**
-     * Aquí se encuentran las características que tiene la pantalla inicial. Se centra la ventana.
+     * Aquí se encuentran las características que tiene la pantalla. Se centra la ventana.
      */
     public aboutAutomaton() {
         initComponents();
@@ -98,6 +98,11 @@ public class aboutAutomaton extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Se cierra la ventana actual y se abre la ventana principal.
+     * 
+     * @param evt 
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         PrincipalView p = new PrincipalView();
         p.setVisible(true);

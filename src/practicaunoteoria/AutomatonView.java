@@ -10,8 +10,12 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author Juan Gutierrez
+ * JFrame en donde se visualiza el autómata mediante un JTable, en él se encuentran los botones para
+ * la verificación, conversión, simplificación y prueba del autómata finito.
+ * Además en esta clase están los métodos de los procesos que se mencionaron.
+ * 
+ * @author Andrés Quintero
+ * @author Juan Esteban Gutiérrez
  */
 public class AutomatonView extends javax.swing.JFrame {
 
@@ -22,12 +26,12 @@ public class AutomatonView extends javax.swing.JFrame {
     private String[] inputSymbols;
     private String[] states;
     private FA automaton;
-    
+
     public AutomatonView() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
-    
+
     public AutomatonView(String[] states, String[] inputSymbols) {
         this.getContentPane().setBackground(new Color(240, 249, 6));
         this.setResizable(false);
@@ -39,7 +43,7 @@ public class AutomatonView extends javax.swing.JFrame {
         showAutomaton(this.states, this.inputSymbols);
         this.setLocationRelativeTo(null);
     }
-    
+
     public void showAutomaton(String[] states, String[] inputSymbols) {
         addRowsToTable(states.length, inputSymbols.length);
         automatonController.setStates(states);
@@ -47,7 +51,7 @@ public class AutomatonView extends javax.swing.JFrame {
         addSymbolsToTable(automatonController.getMyAutomaton().getInputSymbols());
         addStatesToTable(automatonController.getMyAutomaton().getStates());
     }
-    
+
     public void addRowsToTable(int rows, int columns) {
         String i = new String();
         String j = "";
@@ -59,7 +63,7 @@ public class AutomatonView extends javax.swing.JFrame {
             m.addRow(new Object[]{i});
         }
     }
-    
+
     private boolean check() {
         int c = 0;
         String[] a;
@@ -96,7 +100,7 @@ public class AutomatonView extends javax.swing.JFrame {
         }
         return true;
     }
-    
+
     public int getSymbolRow(String symbol) {
         int row = -10;
         for (int j = 0; j < tableAutomaton.getRowCount(); j++) {
@@ -106,7 +110,7 @@ public class AutomatonView extends javax.swing.JFrame {
         }
         return row;
     }
-    
+
     public void addStatesToTable(ArrayList<State> states) {
         DefaultTableModel m = (DefaultTableModel) tableAutomaton.getModel();
         m.addColumn("A/R");
@@ -119,7 +123,7 @@ public class AutomatonView extends javax.swing.JFrame {
             }
         }
     }
-    
+
     public boolean ItWasProcessed(ArrayList<String> processed, String state) {
         for (int j = 0; j < processed.size(); j++) {
             if (processed.get(j).contains(state)) {
@@ -128,15 +132,15 @@ public class AutomatonView extends javax.swing.JFrame {
         }
         return false;
     }
-    
+
     public void emptyTable() {
         for (int i = 0; i < tableAutomaton.getRowCount(); i++) {
             for (int j = 1; j < tableAutomaton.getColumnCount() - 1; j++) {
                 tableAutomaton.setValueAt("", i, j);
             }
-        }        
+        }
     }
-    
+
     public boolean ItAlreadyExists(ArrayList<String[]> locators, String[] locator) {
         String[] a;
         boolean b = true;
@@ -158,7 +162,7 @@ public class AutomatonView extends javax.swing.JFrame {
         }
         return b;
     }
-    
+
     public State joinStates(ArrayList<State> states) {
         boolean initialState = false;
         boolean aceptingState = false;
@@ -168,7 +172,7 @@ public class AutomatonView extends javax.swing.JFrame {
             if (states.get(j).isInitialState()) {
                 initialState = true;
             }
-            
+
             if (states.get(j).isAcceptingState()) {
                 aceptingState = true;
             }
@@ -176,7 +180,7 @@ public class AutomatonView extends javax.swing.JFrame {
         State state = new State(r, aceptingState, initialState);
         return state;
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -335,14 +339,14 @@ public class AutomatonView extends javax.swing.JFrame {
             if (nonDeterministic) {
                 javax.swing.JOptionPane.showMessageDialog(this, "¡The automaton entered is non-deterministic!");
             } else {
-                
+
                 javax.swing.JOptionPane.showMessageDialog(this, "¡The automaton entered is deterministic!");
             }
         } catch (NullPointerException e) {
             javax.swing.JOptionPane.showMessageDialog(this, "Fill the transitions correctly");
         }
     }//GEN-LAST:event_buttonDeterminismActionPerformed
-    
+
     public void addSymbolsToTable(ArrayList<String> symbols) {
         DefaultTableModel m = (DefaultTableModel) tableAutomaton.getModel();
         m.addColumn("States");
@@ -350,7 +354,7 @@ public class AutomatonView extends javax.swing.JFrame {
             m.addColumn(symbols.get(j));
         }
     }
-    
+
     private void addTransitionsToTable(ArrayList<ArrayList<String>> transitions) {
         for (int i = 0; i < transitions.size(); i++) {
             ArrayList<String> transitions1 = transitions.get(i);
@@ -359,13 +363,13 @@ public class AutomatonView extends javax.swing.JFrame {
             }
         }
     }
-    
+
     private ArrayList<State> arentStrangers() {
         ArrayList<State> visited = new ArrayList<>();
         automatonPath(visited, automatonController.getMyAutomaton().getState((String) tableAutomaton.getValueAt(0, 0)));
         return visited;
     }
-    
+
     private void automatonPath(ArrayList<State> visited, State vertex) {
         State auxiliaryState;
         visited.add(vertex);
@@ -376,7 +380,7 @@ public class AutomatonView extends javax.swing.JFrame {
             }
         }
     }
-    
+
 
     private void buttonConvertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConvertActionPerformed
         try {
@@ -530,7 +534,7 @@ public class AutomatonView extends javax.swing.JFrame {
             javax.swing.JOptionPane.showMessageDialog(this, "¡Fill the transitions correctly!");
         }
     }//GEN-LAST:event_buttonConvertActionPerformed
-    
+
     public boolean stateBelongsToSet(ArrayList<State> set, String state) {
         for (int i = 0; i < set.size(); i++) {
             if (set.get(i).getNameState().contentEquals(state)) {
@@ -539,7 +543,7 @@ public class AutomatonView extends javax.swing.JFrame {
         }
         return false;
     }
-    
+
     private String getCompositeState(String state, ArrayList<State> states) {
         for (int i = 0; i < states.size(); i++) {
             if (states.get(i).getNameState().contains(state)) {
@@ -548,7 +552,7 @@ public class AutomatonView extends javax.swing.JFrame {
         }
         return "";
     }
-    
+
     public boolean statesBelong(ArrayList<ArrayList<State>> sets, ArrayList<String> states) {
         String test;
         ArrayList<State> set;
@@ -571,7 +575,7 @@ public class AutomatonView extends javax.swing.JFrame {
         }
         return false;
     }
-    
+
     public void addTransitions(JTable table) {
         try {
             ArrayList<ArrayList<String>> transitions1 = new ArrayList<>();
@@ -596,18 +600,18 @@ public class AutomatonView extends javax.swing.JFrame {
                 }
             }
             automatonController.setTransitions(transitions1);
-            
+
         } catch (NullPointerException e) {
             e.printStackTrace();
             javax.swing.JOptionPane.showMessageDialog(this, "Por favor de click en otra parte de la ventana\n"
                     + " (Preferiblemente la primera fila). ");
         }
     }
-    
-    public void disableConvertButton(){
-       buttonConvert.setVisible(false);
+
+    public void disableConvertButton() {
+        buttonConvert.setVisible(false);
     }
-    
+
     private void buttonSimplifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSimplifyActionPerformed
         if (check()) {
             try {
@@ -664,7 +668,7 @@ public class AutomatonView extends javax.swing.JFrame {
                                 break;
                             }
                         }
-                        
+
                         if (d) {
                             break;
                         }
@@ -675,7 +679,7 @@ public class AutomatonView extends javax.swing.JFrame {
                 for (int i = 0; i < setStates.size(); i++) {
                     auxiliaryStates.add(joinStates(setStates.get(i)));
                 }
-                
+
                 ArrayList<ArrayList<String>> transicionesAux = new ArrayList<>();
                 ArrayList<String> transicionesFE;
                 State constTransiciones;
@@ -688,7 +692,7 @@ public class AutomatonView extends javax.swing.JFrame {
                         transicionesFE.add(getCompositeState((String) tableAutomaton.getValueAt(index, j), auxiliaryStates));
                     }
                     transicionesAux.add((ArrayList<String>) transicionesFE.clone());
-                    
+
                 }
                 automaton = new FA(transicionesAux, auxiliaryStates, automatonController.getMyAutomaton().getInputSymbols());
                 automatonController.setMyAutomaton(automaton);
@@ -729,9 +733,9 @@ public class AutomatonView extends javax.swing.JFrame {
             javax.swing.JOptionPane.showMessageDialog(this, "Click on another part of the screen");
         }
     }//GEN-LAST:event_buttonCheckAutomatonActionPerformed
-    
+
     public class MyModel extends DefaultTableModel {
-        
+
         @Override
         public boolean isCellEditable(int i, int i1) {
             return i1 >= 1;
