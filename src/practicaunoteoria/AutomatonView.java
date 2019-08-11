@@ -1,5 +1,6 @@
 package practicaunoteoria;
 
+import java.awt.Color;
 import practicaunoteoria.resources.QueueFA;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,6 +29,8 @@ public class AutomatonView extends javax.swing.JFrame {
     }
     
     public AutomatonView(String[] states, String[] inputSymbols) {
+        this.getContentPane().setBackground(new Color(240, 249, 6));
+        this.setResizable(false);
         initComponents();
         automaton = new FA();
         automatonController = new AutomatonController();
@@ -202,6 +205,9 @@ public class AutomatonView extends javax.swing.JFrame {
         tableAutomaton.setSelectionBackground(new java.awt.Color(0, 120, 215));
         jScrollPane1.setViewportView(tableAutomaton);
 
+        buttonAddTransition.setBackground(new java.awt.Color(0, 98, 196));
+        buttonAddTransition.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
+        buttonAddTransition.setForeground(new java.awt.Color(255, 255, 255));
         buttonAddTransition.setLabel("Add transition");
         buttonAddTransition.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -209,6 +215,9 @@ public class AutomatonView extends javax.swing.JFrame {
             }
         });
 
+        buttonCheckAutomaton.setBackground(new java.awt.Color(0, 98, 196));
+        buttonCheckAutomaton.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 14)); // NOI18N
+        buttonCheckAutomaton.setForeground(new java.awt.Color(255, 255, 255));
         buttonCheckAutomaton.setLabel("Check the automaton");
         buttonCheckAutomaton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -216,6 +225,9 @@ public class AutomatonView extends javax.swing.JFrame {
             }
         });
 
+        buttonDeterminism.setBackground(new java.awt.Color(0, 98, 196));
+        buttonDeterminism.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 14)); // NOI18N
+        buttonDeterminism.setForeground(new java.awt.Color(255, 255, 255));
         buttonDeterminism.setLabel("Determinism or non-determinism");
         buttonDeterminism.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -223,6 +235,9 @@ public class AutomatonView extends javax.swing.JFrame {
             }
         });
 
+        buttonConvert.setBackground(new java.awt.Color(0, 98, 196));
+        buttonConvert.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 14)); // NOI18N
+        buttonConvert.setForeground(new java.awt.Color(255, 255, 255));
         buttonConvert.setLabel("Convert to deterministic automaton");
         buttonConvert.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -230,6 +245,9 @@ public class AutomatonView extends javax.swing.JFrame {
             }
         });
 
+        buttonSimplify.setBackground(new java.awt.Color(0, 98, 196));
+        buttonSimplify.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 14)); // NOI18N
+        buttonSimplify.setForeground(new java.awt.Color(255, 255, 255));
         buttonSimplify.setLabel("Simplify automaton");
         buttonSimplify.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -255,9 +273,9 @@ public class AutomatonView extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(buttonAddTransition, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(buttonDeterminism, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
-                            .addComponent(buttonConvert, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
-                            .addComponent(buttonSimplify, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)))
+                            .addComponent(buttonDeterminism, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(buttonConvert, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
+                            .addComponent(buttonSimplify, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(buttonCheckAutomaton, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)

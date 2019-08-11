@@ -11,6 +11,7 @@ public class PrincipalView extends javax.swing.JFrame {
      * Creates new form PrincipalView
      */
     public PrincipalView() {
+        this.setResizable(false);
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -93,7 +94,9 @@ public class PrincipalView extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonStartActionPerformed
 
     private void buttonAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAboutActionPerformed
-        // TODO add your handling code here:
+        aboutAutomaton a = new aboutAutomaton();
+        a.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_buttonAboutActionPerformed
 
     /**

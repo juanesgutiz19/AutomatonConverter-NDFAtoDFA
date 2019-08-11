@@ -31,9 +31,9 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="buttonAddTransition" max="32767" attributes="0"/>
-                          <Component id="buttonDeterminism" alignment="1" pref="258" max="32767" attributes="0"/>
-                          <Component id="buttonConvert" alignment="1" pref="258" max="32767" attributes="0"/>
-                          <Component id="buttonSimplify" alignment="1" pref="258" max="32767" attributes="0"/>
+                          <Component id="buttonDeterminism" alignment="1" max="32767" attributes="0"/>
+                          <Component id="buttonConvert" alignment="1" pref="322" max="32767" attributes="0"/>
+                          <Component id="buttonSimplify" alignment="1" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -106,6 +106,15 @@
     </Container>
     <Component class="java.awt.Button" name="buttonAddTransition">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="c4" green="62" red="0" type="rgb"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Arial Rounded MT Bold" size="24" style="1"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
         <Property name="label" type="java.lang.String" value="Add transition"/>
       </Properties>
       <Events>
@@ -114,6 +123,15 @@
     </Component>
     <Component class="java.awt.Button" name="buttonCheckAutomaton">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="c4" green="62" red="0" type="rgb"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Arial Rounded MT Bold" size="14" style="1"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
         <Property name="label" type="java.lang.String" value="Check the automaton"/>
       </Properties>
       <Events>
@@ -122,6 +140,15 @@
     </Component>
     <Component class="java.awt.Button" name="buttonDeterminism">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="c4" green="62" red="0" type="rgb"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Arial Rounded MT Bold" size="14" style="1"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
         <Property name="label" type="java.lang.String" value="Determinism or non-determinism"/>
       </Properties>
       <Events>
@@ -130,6 +157,15 @@
     </Component>
     <Component class="java.awt.Button" name="buttonConvert">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="c4" green="62" red="0" type="rgb"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Arial Rounded MT Bold" size="14" style="1"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
         <Property name="label" type="java.lang.String" value="Convert to deterministic automaton"/>
       </Properties>
       <Events>
@@ -138,6 +174,15 @@
     </Component>
     <Component class="java.awt.Button" name="buttonSimplify">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="c4" green="62" red="0" type="rgb"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Arial Rounded MT Bold" size="14" style="1"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
         <Property name="label" type="java.lang.String" value="Simplify automaton"/>
       </Properties>
       <Events>

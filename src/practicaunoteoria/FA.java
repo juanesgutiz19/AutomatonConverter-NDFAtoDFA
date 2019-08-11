@@ -89,9 +89,7 @@ public class FA {
         return inputSymbols;
     }
 
-
     public void setInputSymbols(ArrayList<String> inputSymbols) {
         this.inputSymbols = inputSymbols;
-    }
-    
+    } 
 }
