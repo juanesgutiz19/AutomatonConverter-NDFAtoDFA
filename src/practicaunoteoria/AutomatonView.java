@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Vector;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -20,12 +21,12 @@ public class AutomatonView extends javax.swing.JFrame {
     private String[] inputSymbols;
     private String[] states;
     private FA automaton;
-
+    
     public AutomatonView() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
-
+    
     public AutomatonView(String[] states, String[] inputSymbols) {
         initComponents();
         automaton = new FA();
@@ -35,7 +36,7 @@ public class AutomatonView extends javax.swing.JFrame {
         showAutomaton(this.states, this.inputSymbols);
         this.setLocationRelativeTo(null);
     }
-
+    
     public void showAutomaton(String[] states, String[] inputSymbols) {
         addRowsToTable(states.length, inputSymbols.length);
         automatonController.setStates(states);
@@ -43,17 +44,19 @@ public class AutomatonView extends javax.swing.JFrame {
         addSymbolsToTable(automatonController.getMyAutomaton().getInputSymbols());
         addStatesToTable(automatonController.getMyAutomaton().getStates());
     }
-
+    
     public void addRowsToTable(int rows, int columns) {
         String i = new String();
         String j = "";
-        for (int k = 0; k < columns; k++) 
+        for (int k = 0; k < columns; k++) {
             i = i.concat(j);
+        }
         DefaultTableModel m = (DefaultTableModel) tableAutomaton.getModel();
-        for (int k = 0; k < rows; k++) 
+        for (int k = 0; k < rows; k++) {
             m.addRow(new Object[]{i});
+        }
     }
-
+    
     private boolean check() {
         int c = 0;
         String[] a;
@@ -90,7 +93,7 @@ public class AutomatonView extends javax.swing.JFrame {
         }
         return true;
     }
-
+    
     public int getSymbolRow(String symbol) {
         int row = -10;
         for (int j = 0; j < tableAutomaton.getRowCount(); j++) {
@@ -100,7 +103,7 @@ public class AutomatonView extends javax.swing.JFrame {
         }
         return row;
     }
-
+    
     public void addStatesToTable(ArrayList<State> states) {
         DefaultTableModel m = (DefaultTableModel) tableAutomaton.getModel();
         m.addColumn("A/R");
@@ -113,7 +116,7 @@ public class AutomatonView extends javax.swing.JFrame {
             }
         }
     }
-
+    
     public boolean ItWasProcessed(ArrayList<String> processed, String state) {
         for (int j = 0; j < processed.size(); j++) {
             if (processed.get(j).contains(state)) {
@@ -122,13 +125,15 @@ public class AutomatonView extends javax.swing.JFrame {
         }
         return false;
     }
-
-    private String getCompositeState(String state, ArrayList<State> states) {
-        for (int i = 0; i < states.size(); i++) 
-            if (states.get(i).getNameState().contains(state)) return states.get(i).getNameState();
-        return "";
+    
+    public void emptyTable() {
+        for (int i = 0; i < tableAutomaton.getRowCount(); i++) {
+            for (int j = 1; j < tableAutomaton.getColumnCount() - 1; j++) {
+                tableAutomaton.setValueAt("", i, j);
+            }
+        }        
     }
-
+    
     public boolean ItAlreadyExists(ArrayList<String[]> locators, String[] locator) {
         String[] a;
         boolean b = true;
@@ -150,23 +155,24 @@ public class AutomatonView extends javax.swing.JFrame {
         }
         return b;
     }
-
+    
     public State joinStates(ArrayList<State> states) {
         boolean initialState = false;
         boolean aceptingState = false;
         String r = "";
         for (int j = 0; j < states.size(); j++) {
             r = r + states.get(j).getNameState();
-            if (states.get(j).isInitialState()) 
+            if (states.get(j).isInitialState()) {
                 initialState = true;
+            }
             
-            if (states.get(j).isAcceptingState()) 
+            if (states.get(j).isAcceptingState()) {
                 aceptingState = true;
+            }
         }
         State state = new State(r, aceptingState, initialState);
         return state;
     }
-
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -179,7 +185,7 @@ public class AutomatonView extends javax.swing.JFrame {
         buttonDeterminism = new java.awt.Button();
         buttonConvert = new java.awt.Button();
         buttonSimplify = new java.awt.Button();
-        jTextField1 = new javax.swing.JTextField();
+        textFieldString = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -204,6 +210,11 @@ public class AutomatonView extends javax.swing.JFrame {
         });
 
         buttonCheckAutomaton.setLabel("Check the automaton");
+        buttonCheckAutomaton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCheckAutomatonActionPerformed(evt);
+            }
+        });
 
         buttonDeterminism.setLabel("Determinism or non-determinism");
         buttonDeterminism.addActionListener(new java.awt.event.ActionListener() {
@@ -226,9 +237,9 @@ public class AutomatonView extends javax.swing.JFrame {
             }
         });
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        textFieldString.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                textFieldStringActionPerformed(evt);
             }
         });
 
@@ -250,7 +261,7 @@ public class AutomatonView extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(buttonCheckAutomaton, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1)))
+                        .addComponent(textFieldString)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -270,16 +281,16 @@ public class AutomatonView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(buttonCheckAutomaton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textFieldString, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void textFieldStringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldStringActionPerformed
 
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_textFieldStringActionPerformed
 
     private void buttonAddTransitionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddTransitionActionPerformed
         int rowIndex = tableAutomaton.getSelectedRow();
@@ -295,24 +306,31 @@ public class AutomatonView extends javax.swing.JFrame {
     private void buttonDeterminismActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeterminismActionPerformed
         try {
             boolean nonDeterministic = false;
-            for (int i = 0; i < tableAutomaton.getRowCount(); i++) 
-                for (int j = 1; j < tableAutomaton.getColumnCount() - 1; j++) 
-                    if (tableAutomaton.getValueAt(i, j).toString().contains(",")) nonDeterministic = true;   
-            if (nonDeterministic) 
+            for (int i = 0; i < tableAutomaton.getRowCount(); i++) {
+                for (int j = 1; j < tableAutomaton.getColumnCount() - 1; j++) {
+                    if (tableAutomaton.getValueAt(i, j).toString().contains(",")) {
+                        nonDeterministic = true;
+                    }
+                }
+            }
+            if (nonDeterministic) {
                 javax.swing.JOptionPane.showMessageDialog(this, "¡The automaton entered is non-deterministic!");
-             else 
+            } else {
                 javax.swing.JOptionPane.showMessageDialog(this, "¡The automaton entered is deterministic!");
+            }
         } catch (NullPointerException e) {
             javax.swing.JOptionPane.showMessageDialog(this, "Fill the transitions correctly");
         }
     }//GEN-LAST:event_buttonDeterminismActionPerformed
+    
     public void addSymbolsToTable(ArrayList<String> symbols) {
         DefaultTableModel m = (DefaultTableModel) tableAutomaton.getModel();
         m.addColumn("States");
-        for (int j = 0; j < symbols.size(); j++) 
+        for (int j = 0; j < symbols.size(); j++) {
             m.addColumn(symbols.get(j));
+        }
     }
-
+    
     private void addTransitionsToTable(ArrayList<ArrayList<String>> transitions) {
         for (int i = 0; i < transitions.size(); i++) {
             ArrayList<String> transitions1 = transitions.get(i);
@@ -322,116 +340,24 @@ public class AutomatonView extends javax.swing.JFrame {
         }
     }
     
-    private void simplify() {
-        boolean d = true;
-        boolean allStatesBelong;
-        ArrayList<String> evaluatedTransitions;
-        ArrayList<State> auxiliaryStates;
-        ArrayList<State> newStates;
-        ArrayList<State> set;
-        ArrayList<String> inputSymbols1 = automatonController.getMyAutomaton().getInputSymbols();
-        ArrayList<ArrayList<State>> setStates = new ArrayList<>();
-        automatonController.getMyAutomaton().setStates(arentStrangers());
-        automatonController.separateStates(setStates);
-        while (d) {
-            for (int i = 0; i < setStates.size(); i++) {
-                auxiliaryStates = setStates.get(i);
-                for (int j = 0; j < inputSymbols1.size(); j++) {
-                    evaluatedTransitions = new ArrayList<>();
-                    for (int k = 0; k < auxiliaryStates.size(); k++) {
-                        evaluatedTransitions.add((String) tableAutomaton.getValueAt(getSymbolRow(
-                                auxiliaryStates.get(k).getNameState()), j + 1));
-                    }
-                    allStatesBelong = true;
-                    if (!statesBelong(setStates, evaluatedTransitions)) {
-                        allStatesBelong = false;
-                    }
-                    if (!allStatesBelong) {
-                        for (int k = 0; k < setStates.size(); k++) {
-                            newStates = new ArrayList<>();
-                            for (int l = 0; l < evaluatedTransitions.size(); l++) {
-                                if (stateBelongsToSet(setStates.get(k), evaluatedTransitions.get(l))) {
-                                    newStates.add(auxiliaryStates.get(l));
-                                }
-                            }
-                            if (!newStates.isEmpty()) {
-                                set = (ArrayList<State>) newStates.clone();
-                                setStates.add(set);
-                                for (int h = 0; h < newStates.size(); h++) {
-                                    evaluatedTransitions.remove(auxiliaryStates.indexOf(newStates.get(h)));
-                                    auxiliaryStates.remove(newStates.get(h));
-                                }
-                            }
-                        }
-                        for (int k = 0; k < setStates.size(); k++) {
-                            if (setStates.get(k).isEmpty()) {
-                                setStates.remove(k);
-                                k = 0;
-                            }
-                        }
-                    } else {
-                        d = false;
-                    }
-                    if (d) {
-                        break;
-                    }
-                }
-
-                if (d) {
-                    break;
-                }
-            }
-        }
-        
-        auxiliaryStates = new ArrayList<>();
-        automatonController.setInitialBeginning(setStates);
-        for (int i = 0; i < setStates.size(); i++) {
-            auxiliaryStates.add(joinStates(setStates.get(i)));
-        }
-        
-        ArrayList<ArrayList<String>> transicionesAux = new ArrayList<>();
-        ArrayList<String> transicionesFE;
-        State constTransiciones;
-        int index;
-        for (int i = 0; i < setStates.size(); i++) {
-            constTransiciones = setStates.get(i).get(0);
-            index = getSymbolRow(constTransiciones.getNameState());
-            transicionesFE = new ArrayList<>();
-            for (int j = 1; j < tableAutomaton.getColumnCount() - 1; j++) {
-                transicionesFE.add(StateToWhichItBelongs((String) tableAutomaton.getValueAt(index, j), auxiliaryStates));
-            }
-            transicionesAux.add((ArrayList<String>) transicionesFE.clone());
-
-        }
-        automaton = new FA(transicionesAux, auxiliaryStates,automatonController.getMyAutomaton().getInputSymbols() );
-        automatonController.setMyAutomaton(automaton);
-        DefaultTableModel model = new DefaultTableModel();
-        tableAutomaton.setModel(model);
-        System.out.println(tableAutomaton.getColumnName(tableAutomaton.getColumnCount() - 1));
-        addSymbolsToTable(automatonController.getMyAutomaton().getInputSymbols());
-        addRowsToTable(automatonController.getMyAutomaton().getStates().size(),inputSymbols.length);
-        addStatesToTable(automatonController.getMyAutomaton().getStates());
-        addTransitionsToTable(automatonController.getMyAutomaton().getTransitions());
-    }
-
-    
     private ArrayList<State> arentStrangers() {
         ArrayList<State> visited = new ArrayList<>();
         automatonPath(visited, automatonController.getMyAutomaton().getState((String) tableAutomaton.getValueAt(0, 0)));
         return visited;
     }
     
-    
     private void automatonPath(ArrayList<State> visited, State vertex) {
         State auxiliaryState;
         visited.add(vertex);
         for (int i = 1; i < tableAutomaton.getColumnCount() - 1; i++) {
             auxiliaryState = automatonController.getMyAutomaton().getState((String) tableAutomaton.getValueAt(getSymbolRow(vertex.getNameState()), i));
-            if (!visited.contains(auxiliaryState)) automatonPath(visited, auxiliaryState);             
+            if (!visited.contains(auxiliaryState)) {
+                automatonPath(visited, auxiliaryState);
+            }
         }
     }
     
-    
+
     private void buttonConvertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConvertActionPerformed
         try {
             ArrayList<String[]> indicators = new ArrayList<>();
@@ -577,31 +503,31 @@ public class AutomatonView extends javax.swing.JFrame {
             tableAutomaton.setModel(m);
             System.out.println(tableAutomaton.getColumnName(tableAutomaton.getColumnCount() - 1));
             addSymbolsToTable(automatonController.getMyAutomaton().getInputSymbols());
-            addRowsToTable(automatonController.getMyAutomaton().getStates().size(),inputSymbols.length);      
+            addRowsToTable(automatonController.getMyAutomaton().getStates().size(), inputSymbols.length);
             addStatesToTable(automatonController.getMyAutomaton().getStates());
             addTransitionsToTable(automatonController.getMyAutomaton().getTransitions());
         } catch (NullPointerException e) {
             javax.swing.JOptionPane.showMessageDialog(this, "¡Fill the transitions correctly!");
         }
     }//GEN-LAST:event_buttonConvertActionPerformed
-
-    
     
     public boolean stateBelongsToSet(ArrayList<State> set, String state) {
-        for (int i = 0; i < set.size(); i++) 
-            if (set.get(i).getNameState().contentEquals(state)) 
+        for (int i = 0; i < set.size(); i++) {
+            if (set.get(i).getNameState().contentEquals(state)) {
                 return true;
+            }
+        }
         return false;
     }
     
-    
-    private String StateToWhichItBelongs(String state, ArrayList<State> states) {
-        for (int i = 0; i < states.size(); i++) 
-            if (states.get(i).getNameState().contains(state)) 
+    private String getCompositeState(String state, ArrayList<State> states) {
+        for (int i = 0; i < states.size(); i++) {
+            if (states.get(i).getNameState().contains(state)) {
                 return states.get(i).getNameState();
+            }
+        }
         return "";
     }
-    
     
     public boolean statesBelong(ArrayList<ArrayList<State>> sets, ArrayList<String> states) {
         String test;
@@ -610,33 +536,177 @@ public class AutomatonView extends javax.swing.JFrame {
         for (int i = 0; i < sets.size(); i++) {
             set = sets.get(i);
             test = "";
-            for (int j = 0; j < set.size(); j++) 
-                test = test + set.get(j).getNameState(); 
+            for (int j = 0; j < set.size(); j++) {
+                test = test + set.get(j).getNameState();
+            }
             c = 0;
-            for (int j = 0; j < states.size(); j++) 
-                if (test.contains(states.get(j))) 
+            for (int j = 0; j < states.size(); j++) {
+                if (test.contains(states.get(j))) {
                     c++;
-            if (c == states.size()) 
+                }
+            }
+            if (c == states.size()) {
                 return true;
+            }
         }
         return false;
+    }
+    
+    public void addTransitions(JTable table) {
+        try {
+            ArrayList<ArrayList<String>> transitions1 = new ArrayList<>();
+            ArrayList<String> transitions2;
+            int c = 0;
+            for (int i = 0; i < table.getRowCount(); i++) {
+                transitions2 = new ArrayList<>();
+                for (int j = 1; j < table.getColumnCount() - 1; j++) {
+                    if (!automatonController.belongsToStates(automatonController.getMyAutomaton().getStates(), table.getValueAt(i, j).toString())) {
+                        javax.swing.JOptionPane.showMessageDialog(this, "Las transiciones ingresadas no son correctas. ");
+                        emptyTable();
+                        c++;
+                        break;
+                    } else {
+                        transitions2.add(table.getValueAt(i, j).toString());
+                    }
+                }
+                if (c != 0) {
+                    break;
+                } else {
+                    transitions1.add(transitions2);
+                }
+            }
+            automatonController.setTransitions(transitions1);
+            
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+            javax.swing.JOptionPane.showMessageDialog(this, "Por favor de click en otra parte de la ventana\n"
+                    + " (Preferiblemente la primera fila). ");
+        }
     }
     private void buttonSimplifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSimplifyActionPerformed
         if (check()) {
             try {
-                simplify();
+                boolean d = true;
+                boolean allStatesBelong;
+                ArrayList<String> evaluatedTransitions;
+                ArrayList<State> auxiliaryStates;
+                ArrayList<State> newStates;
+                ArrayList<State> set;
+                ArrayList<String> inputSymbols1 = automatonController.getMyAutomaton().getInputSymbols();
+                ArrayList<ArrayList<State>> setStates = new ArrayList<>();
+                automatonController.getMyAutomaton().setStates(arentStrangers());
+                automatonController.separateStates(setStates);
+                while (d) {
+                    for (int i = 0; i < setStates.size(); i++) {
+                        auxiliaryStates = setStates.get(i);
+                        for (int j = 0; j < inputSymbols1.size(); j++) {
+                            evaluatedTransitions = new ArrayList<>();
+                            for (int k = 0; k < auxiliaryStates.size(); k++) {
+                                evaluatedTransitions.add((String) tableAutomaton.getValueAt(getSymbolRow(
+                                        auxiliaryStates.get(k).getNameState()), j + 1));
+                            }
+                            allStatesBelong = true;
+                            if (!statesBelong(setStates, evaluatedTransitions)) {
+                                allStatesBelong = false;
+                            }
+                            if (!allStatesBelong) {
+                                for (int k = 0; k < setStates.size(); k++) {
+                                    newStates = new ArrayList<>();
+                                    for (int l = 0; l < evaluatedTransitions.size(); l++) {
+                                        if (stateBelongsToSet(setStates.get(k), evaluatedTransitions.get(l))) {
+                                            newStates.add(auxiliaryStates.get(l));
+                                        }
+                                    }
+                                    if (!newStates.isEmpty()) {
+                                        set = (ArrayList<State>) newStates.clone();
+                                        setStates.add(set);
+                                        for (int h = 0; h < newStates.size(); h++) {
+                                            evaluatedTransitions.remove(auxiliaryStates.indexOf(newStates.get(h)));
+                                            auxiliaryStates.remove(newStates.get(h));
+                                        }
+                                    }
+                                }
+                                for (int k = 0; k < setStates.size(); k++) {
+                                    if (setStates.get(k).isEmpty()) {
+                                        setStates.remove(k);
+                                        k = 0;
+                                    }
+                                }
+                            } else {
+                                d = false;
+                            }
+                            if (d) {
+                                break;
+                            }
+                        }
+                        
+                        if (d) {
+                            break;
+                        }
+                    }
+                }
+                auxiliaryStates = new ArrayList<>();
+                automatonController.setInitialBeginning(setStates);
+                for (int i = 0; i < setStates.size(); i++) {
+                    auxiliaryStates.add(joinStates(setStates.get(i)));
+                }
+                
+                ArrayList<ArrayList<String>> transicionesAux = new ArrayList<>();
+                ArrayList<String> transicionesFE;
+                State constTransiciones;
+                int index;
+                for (int i = 0; i < setStates.size(); i++) {
+                    constTransiciones = setStates.get(i).get(0);
+                    index = getSymbolRow(constTransiciones.getNameState());
+                    transicionesFE = new ArrayList<>();
+                    for (int j = 1; j < tableAutomaton.getColumnCount() - 1; j++) {
+                        transicionesFE.add(getCompositeState((String) tableAutomaton.getValueAt(index, j), auxiliaryStates));
+                    }
+                    transicionesAux.add((ArrayList<String>) transicionesFE.clone());
+                    
+                }
+                automaton = new FA(transicionesAux, auxiliaryStates, automatonController.getMyAutomaton().getInputSymbols());
+                automatonController.setMyAutomaton(automaton);
+                DefaultTableModel model = new DefaultTableModel();
+                tableAutomaton.setModel(model);
+                System.out.println(tableAutomaton.getColumnName(tableAutomaton.getColumnCount() - 1));
+                addSymbolsToTable(automatonController.getMyAutomaton().getInputSymbols());
+                addRowsToTable(automatonController.getMyAutomaton().getStates().size(), inputSymbols.length);
+                addStatesToTable(automatonController.getMyAutomaton().getStates());
+                addTransitionsToTable(automatonController.getMyAutomaton().getTransitions());
             } catch (NullPointerException e) {
                 e.printStackTrace();
-                javax.swing.JOptionPane.showMessageDialog(this, "Por favor de click en otra parte de la ventana\n"
-                        + " (Preferiblemente la primera fila). ");
+                javax.swing.JOptionPane.showMessageDialog(this, "Click on another part of the screen");
             }
         } else {
-            javax.swing.JOptionPane.showMessageDialog(this, "Por favor ingrese las transiciones correctamente.");
+            javax.swing.JOptionPane.showMessageDialog(this, "Fill the transitions correctly");
         }
     }//GEN-LAST:event_buttonSimplifyActionPerformed
 
+    private void buttonCheckAutomatonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCheckAutomatonActionPerformed
+        try {
+            String string = textFieldString.getText();
+            if (string.equals("")) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Enter s string");
+            } else if (automatonController.belongsToSymbols(automatonController.getMyAutomaton().getInputSymbols(), string)) {
+                addTransitions(tableAutomaton);
+                boolean accepted = automatonController.checkString(string, automatonController.getMyAutomaton().getInputSymbols(), automatonController.getMyAutomaton().getStates(), automatonController.getMyAutomaton().getTransitions());
+                if (accepted) {
+                    javax.swing.JOptionPane.showMessageDialog(this, "The text entered is accepted");
+                } else {
+                    javax.swing.JOptionPane.showMessageDialog(this, "The text entered is rejected");
+                }
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "Enter another string");
+                textFieldString.setText("");
+            }
+        } catch (NullPointerException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Click on another part of the screen");
+        }
+    }//GEN-LAST:event_buttonCheckAutomatonActionPerformed
+    
     public class MyModel extends DefaultTableModel {
-
+        
         @Override
         public boolean isCellEditable(int i, int i1) {
             return i1 >= 1;
@@ -685,7 +755,7 @@ public class AutomatonView extends javax.swing.JFrame {
     private java.awt.Button buttonDeterminism;
     private java.awt.Button buttonSimplify;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTable tableAutomaton;
+    private javax.swing.JTextField textFieldString;
     // End of variables declaration//GEN-END:variables
 }

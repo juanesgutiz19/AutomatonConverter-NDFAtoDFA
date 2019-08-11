@@ -170,6 +170,7 @@ public class GeneratorView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_buttonGenerateActionPerformed
 
+    
     /**
      * @param args the command line arguments
      */

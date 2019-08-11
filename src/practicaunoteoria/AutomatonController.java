@@ -61,6 +61,14 @@ public class AutomatonController {
         myAutomaton.setStates(automatonStates);
     }
 
+    public int searchState(ArrayList<State> states, String state) {
+        int position = 0;
+        for (int i = 0; i < states.size(); i++) 
+            if (states.get(i).getNameState().equals(state)) 
+                position = i;
+        return position;
+    }
+    
     public void setInitialBeginning(ArrayList<ArrayList<State>> setStates) {
         ArrayList<State> aux1;
         State aux3;
@@ -88,11 +96,13 @@ public class AutomatonController {
     public void separateStates(ArrayList<ArrayList<State>> setStates) {
         ArrayList<State> Astates = new ArrayList<>();
         ArrayList<State> Rstates = new ArrayList<>();
-        for (int i = 0; i < myAutomaton.getStates().size(); i++) 
-            if (myAutomaton.getStates().get(i).isAcceptingState()) 
+        for (int i = 0; i < myAutomaton.getStates().size(); i++) {
+            if (myAutomaton.getStates().get(i).isAcceptingState()) {
                 Rstates.add(myAutomaton.getStates().get(i));
-             else 
+            } else {
                 Astates.add(myAutomaton.getStates().get(i));
+            }
+        }
         setStates.add(Astates);
         setStates.add(Rstates);
     }
@@ -101,11 +111,73 @@ public class AutomatonController {
         myAutomaton.setTransitions(transitions);
     }
 
+    public boolean belongsToStates(ArrayList<State> states, String transition) {
+        boolean j = true;
+        for (int i = 0; i < states.size(); i++) 
+            if (!transition.equals(states.get(i).getNameState())) {
+                j = false;
+            } else {
+                j = true;
+                break;
+            }
+        return j;
+
+    }
+
     public ArrayList<ArrayList<String>> getTransitions() {
         return myAutomaton.getTransitions();
     }
 
+    public boolean belongsToSymbols(ArrayList<String> symbols, String string) {
+        boolean b = true;
+        int c;
+        String charOfString;
+        for (int i = 0; i < string.length(); i++) {
+            charOfString = Character.toString(string.charAt(i));
+            c = 0;
+            for (int j = 0; j < symbols.size(); j++) {
+                if (!charOfString.equals(symbols.get(j))) {
+                    c++;
+                }
+                if (c == symbols.size()) {
+                    b = false;
+                    break;
+                }
+            }
+            if (b == false) {
+                break;
+            }
+        }
+        return b;
+    }
+
     public void setMyAutomaton(FA myAutomaton) {
         this.myAutomaton = myAutomaton;
+    }
+    
+    public boolean checkString(String string, ArrayList<String> symbols, ArrayList<State> states, ArrayList<ArrayList<String>> transitions) {
+        boolean accepted;
+        String transition1;
+        String charString;
+        int row = 0;
+        int column = 0;
+        int countString = 0;
+        while (countString < string.length()) {
+            if (column < symbols.size()) {
+                charString = Character.toString(string.charAt(countString));
+                if (charString.equals(symbols.get(column))) {
+                    transition1 = transitions.get(row).get(column);
+                    row = searchState(states, transition1);
+                    column = 0;
+                    countString++;
+                } else {
+                    column++;
+                }
+            } else {
+                column = 0;
+            }
+        }
+        accepted = states.get(row).isAcceptingState();
+        return accepted;
     }
 }
